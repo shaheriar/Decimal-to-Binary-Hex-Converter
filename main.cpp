@@ -7,9 +7,16 @@ using namespace std;
 vector<string> hex(stack<int>);
 
 int main() {
+	string input;
 	int n;
-	cout << "Enter number" << endl;
-	cin >> n;
+	cout << "Enter number: ";
+	cin >> input;
+	try {
+		n = stoi(input);
+	} catch(const invalid_argument& error) {
+		cout << endl << "Invalid input. Exiting." << endl;
+		return 1;
+	}
 	int nn = n;
 	while (n != -1) {
 		stack<int> ss;
@@ -30,11 +37,20 @@ int main() {
 		}
 		cout << endl << "Hexadecimal: 0x";
 		vector<string> vv = hex(ss);
+		if (vv.size() < 2) {
+			cout << 0;
+		}
 		for (int i = 0; i < vv.size(); i++) {
 			cout << vv.at(i);
 		}
-		cout << endl << endl << "Enter another number? Enter -1 to quit" << endl;
-		cin >> n;
+		cout << endl << endl << "Enter another number? Enter -1 to quit: ";
+		cin >> input;
+		try {
+			n = stoi(input);
+		} catch(const invalid_argument& error) {
+			cout << endl << "Invalid input. Exiting." << endl;
+			return 1;
+		}
 		nn = n;
 	}
 	return 0;
