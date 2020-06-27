@@ -11,11 +11,14 @@ int main() {
 	int n;
 	cout << "Enter number: ";
 	cin >> input;
-	try {
-		n = stoi(input);
-	} catch(const invalid_argument& error) {
-		cout << endl << "Invalid input. Exiting." << endl;
-		return 1;
+	while (1) {
+		try {
+			n = stoi(input);
+		} catch(const invalid_argument& error) {
+			cout << endl << "Invalid input. Try again: ";
+			cin >> input;
+		}
+		break;
 	}
 	int nn = n;
 	while (n != -1) {
@@ -45,11 +48,14 @@ int main() {
 		}
 		cout << endl << endl << "Enter another number? Enter -1 to quit: ";
 		cin >> input;
-		try {
-			n = stoi(input);
-		} catch(const invalid_argument& error) {
-			cout << endl << "Invalid input. Exiting." << endl;
-			return 1;
+		while (1) {
+			try {
+				n = stoi(input);
+			} catch(const invalid_argument& error) {
+				cout << endl << "Invalid input. Try again: ";
+				cin >> input;
+			}
+			break;
 		}
 		nn = n;
 	}
