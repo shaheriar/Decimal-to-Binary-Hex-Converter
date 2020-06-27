@@ -9,7 +9,7 @@ vector<string> hex(stack<int>);
 int main() {
 	string input;
 	int n;
-	cout << "Enter number: ";
+	cout << "Enter a positive number: ";
 	cin >> input;
 	bool done = false;
 	while (!done) {
@@ -34,6 +34,9 @@ int main() {
 			nn /= 16;
 		}
 		cout << endl << "Binary: 0b";
+		if (s.empty()) {
+			cout << 0;
+		}
 		while (!s.empty()) {
 			cout << s.top();
 			s.pop();
