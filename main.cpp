@@ -33,15 +33,21 @@ int main() {
 			ss.push(nn % 16);
 			nn /= 16;
 		}
-		cout << endl << "Binary: 0b";
+		cout << endl << "Binary: ";
 		int i = s.size();
-		while (i % 4 != 0) {
-			cout << 0;
-			i++;
-		}
+		int j = 0;
 		while (!s.empty()) {
-			cout << s.top();
-			s.pop();
+			if (i % 4 != 0) {
+				cout << 0;
+				i++;
+			} else {
+				cout << s.top();
+				s.pop();
+			}
+			j++;
+			if (j % 4 == 0) {
+				cout << ' ';
+			}
 		}
 		cout << endl << "Hexadecimal: 0x";
 		vector<string> vv = hex(ss);
