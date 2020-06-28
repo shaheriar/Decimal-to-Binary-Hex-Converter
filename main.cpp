@@ -34,8 +34,10 @@ int main() {
 			nn /= 16;
 		}
 		cout << endl << "Binary: 0b";
-		if (s.empty()) {
+		int i = s.size();
+		while (i % 4 != 0) {
 			cout << 0;
+			i++;
 		}
 		while (!s.empty()) {
 			cout << s.top();
