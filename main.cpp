@@ -5,10 +5,12 @@
 
 using namespace std;
 
+//RETURNS A BINARY OF AN INT
 string binary(int n) {
 	stack<int> s;
 	string result = "";
 	
+	//BINARY IS BASE 2
 	while (n >= 1) {
 		s.push(n % 2);
 		n /= 2;
@@ -19,10 +21,10 @@ string binary(int n) {
 	
 	while (!s.empty()) {
 		
+		//FOR PRECEDING ZEROS
 		if (i % 4 != 0) {
 			result += "0";
-			i++;
-			
+			i++;	
 		} else {
 			result += to_string(s.top());
 			s.pop();
@@ -30,16 +32,23 @@ string binary(int n) {
 		
 		j++;
 		
+		//A GAP AFTER EVERY NIBBLE
 		if (j % 4 == 0)
 			result+=" ";
-		
 	}
-	
 	return result;
 }
 
-string hextostring(stack<int> s) {
+//RETURNS A HEXADECIMAL OF AN INT
+string hexadecimal(int n) {
+	stack<int> s;
 	string result = "";
+	
+	//HEXADECIMAL IS BASE 16
+	while (n >= 1) {
+		s.push(n % 16);
+		n /= 16;
+	}
 	
 	while(!s.empty()) {
 		switch(s.top()) {
@@ -60,25 +69,14 @@ string hextostring(stack<int> s) {
 		}
 		s.pop();
 	}
-	return result;
-}
-
-string hexadecimal(int n) {
-	stack<int> s;
-	string result = "";
 	
-	while (n >= 1) {
-		s.push(n % 16);
-		n /= 16;
-	}
-	
-	result += hextostring(s);
-	
+	//FOR VALUES <= 0x0F
 	(result.length() < 2) ? result = "0x0" + result : result = "0x" + result;
 	
 	return result;
 }
 
+//HELPER FUNCTION FOR INPUT VALIDATION
 int check(string input) {
 	bool done = false;
 	int n;
@@ -101,9 +99,10 @@ int main() {
 	int n = check(input);
 	
 	while (n != -1) {
-		cout << endl <<         "Decimal: " << n;
-		cout << endl <<         "Binary: " << binary(n);
-		cout << endl <<         "Hexadecimal: " << hexadecimal(n);
+		cout << endl << "Decimal: " << n;
+		
+		cout << endl << "Binary: " << binary(n);
+		cout << endl << "Hexadecimal: " << hexadecimal(n);
 		
 		cout << endl << endl << "Enter another number? Enter -1 to quit: ";
 		cin >> input;
