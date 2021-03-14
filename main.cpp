@@ -38,59 +38,50 @@ string binary(int n) {
 	return result;
 }
 
-vector<string> hexvector(stack<int> s) {
-	vector<string> v;
+string hextostring(stack<int> s) {
+	string result = "";
 	
 	while(!s.empty()) {
 		switch(s.top()) {
 			case 10:
-				v.push_back("A"); break;
+				result += "A"; break;
 			case 11:
-				v.push_back("B"); break;
+				result += "B"; break;
 			case 12:
-				v.push_back("C"); break;
+				result += "C"; break;
 			case 13:
-				v.push_back("D"); break;
+				result += "D"; break;
 			case 14:
-				v.push_back("E"); break;
+				result += "E"; break;
 			case 15:
-				v.push_back("F"); break;
+				result += "F"; break;
 			default:
-				v.push_back(to_string(s.top())); break;
+				result += to_string(s.top()); break;
 		}
 		s.pop();
 	}
-	return v;
+	return result;
 }
 
 string hexadecimal(int n) {
 	stack<int> s;
-	string result = "0x";
+	string result = "";
 	
 	while (n >= 1) {
 		s.push(n % 16);
 		n /= 16;
 	}
 	
-	vector<string> vv = hexvector(s);
+	result += hextostring(s);
 	
-	if (vv.size() < 2)
-		result+="0";
-	
-	for (auto i : vv) {
-		result += i;
-	}
+	(result.length() < 2) ? result = "0x0" + result : result = "0x" + result;
 	
 	return result;
 }
 
-int main() {
-	string input;
-	int n;
-	
-	cout << "Enter a positive number: ";
-	cin >> input;
+int check(string input) {
 	bool done = false;
+	int n;
 	while (!done) {
 		try {
 			n = stoi(input); done = true;
@@ -99,6 +90,15 @@ int main() {
 			cin >> input;
 		}
 	}
+	return n;
+}
+
+int main() {
+	string input;
+	
+	cout << "Enter a positive number: ";
+	cin >> input;
+	int n = check(input);
 	
 	while (n != -1) {
 		cout << endl <<         "Decimal: " << n;
@@ -107,16 +107,7 @@ int main() {
 		
 		cout << endl << endl << "Enter another number? Enter -1 to quit: ";
 		cin >> input;
-		done = false;
-		while (!done) {
-			try {
-				n = stoi(input); done = true;
-			} catch(const invalid_argument& error) {
-				cout << endl << "Invalid input. Try again: ";
-				cin >> input;
-			}
-		}
+		n = check(input);
 	}
-	
 	return 0;
 }
